@@ -1,55 +1,59 @@
-# Superstore Sales Analysis
+# 🛒 Superstore Sales Analysis (SQL Project)
 
-## Business Problem
-Analyze retail sales data to identify profitable and loss-making regions, categories, and products, and provide actionable recommendations to improve overall profitability.
+## 📋 Project Overview
+This project involves a comprehensive analysis of the Superstore Sales Dataset. The primary goal is to identify sales trends, evaluate profitability across different regions and categories, and provide data-driven recommendations to improve business performance.
 
----
-
-## Questions to Answer
-1. Which regions are most and least profitable?  
-2. Which product categories or sub-categories are profitable or unprofitable?  
-3. What is the impact of discounts on profit?  
-4. What are the top-performing products in terms of profit?
+## 🛠️ Tools Used
+* Data Source: Superstore Sales Dataset (~10k rows)
+* Environment: Google BigQuery (SQL)
+* Key Skills: Data Cleaning, Aggregations, Grouping, and Performance Insights.
 
 ---
 
-## Dataset
-- Columns: OrderID, CustomerName, Region, Category, SubCategory, ProductName, Sales, Quantity, Discount, Profit  
-- Rows: ~50,000 (Superstore Sales Dataset)  
+## 🧹 1. Data Cleaning
+Before analysis, I ensured the data quality by checking for null values in critical columns like Sales and Profit.
 
----
-
-## Analysis Steps
-### 1. Data Cleaning
-- Remove duplicates and NULL values.  
-- Ensure column types are correct (numeric for Sales, Profit, Discount).  
-
-### 2. SQL Queries
-Total Sales & Profit
 `sql
-SELECT Region,
-       SUM(Sales) AS total_sales,
-       SUM(Profit) AS total_profit
-FROM orders
+-- Checking for missing values in core metrics
+SELECT 
+    COUNT(*) - COUNT(Order_ID) AS missing_order_id,
+    COUNT(*) - COUNT(Sales) AS missing_sales,
+    COUNT(*) - COUNT(Profit) AS missing_profit
+FROM `my_project.train`;
+Mohamed mostafa, [2/3/2026 8:59 PM]
+SELECT 
+    Region, 
+    ROUND(SUM(Sales), 2) AS Total_Sales, 
+    ROUND(SUM(Profit), 2) AS Total_Profit
+FROM my_project.train
 GROUP BY Region
-ORDER BY total_profit DESC;
-SELECT Category,
-       SUM(Sales) AS total_sales,
-       SUM(Profit) AS total_profit
-FROM orders
+ORDER BY Total_Profit DESC;
+
+Mohamed mostafa, [2/3/2026 8:59 PM]
+SELECT 
+    Category, 
+    ROUND(SUM(Sales), 2) AS Total_Sales, 
+    ROUND(SUM(Profit), 2) AS Total_Profit,
+    ROUND((SUM(Profit) / SUM(Sales)) * 100, 2) AS Profit_Margin_Percentage
+FROM my_project.train
 GROUP BY Category
-ORDER BY total_profit DESC;
-SELECT ProductName,
-       SUM(Profit) AS total_profit
-FROM orders
-GROUP BY ProductName
-ORDER BY total_profit DESC
-LIMIT 10;
-SELECT Discount,
-       AVG(Profit) AS avg_profit
-FROM orders
+ORDER BY Total_Profit DESC;
+
+Mohamed mostafa, [2/3/2026 8:59 PM]
+SELECT 
+    Discount, 
+    AVG(Profit) AS Avg_Profit, 
+    COUNT(*) AS Number_of_Orders
+FROM my_project.train
 GROUP BY Discount
-ORDER BY Discount;
-SELECT SUM(Sales) AS total_sales,
-       SUM(Profit) AS total_profit
-FROM orders;
+ORDER BY Discount ASC;
+
+Mohamed mostafa, [2/3/2026 8:59 PM]
+SELECT 
+    Product_Name, 
+    SUM(Sales) AS Total_Sales, 
+    SUM(Profit) AS Total_Profit
+FROM my_project.train
+GROUP BY Product_Name
+ORDER BY Total_Profit DESC
+LIMIT 10;
