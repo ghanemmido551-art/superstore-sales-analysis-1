@@ -50,7 +50,6 @@ ORDER BY Total_Sales DESC;
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/34bad90b-aceb-4ccb-b20a-defb51ba901b" />
 
 #### 📊 Key Findings & Insights
-`text
 - Top Region: West with $710,219.68 in total revenue.
 - Highest Efficiency: East Region leads with an Avg Order Value of $489.06.
 - Order Volume: West processed 1,587 orders, the highest across all regions.
@@ -71,7 +70,6 @@ ORDER BY Category, Total_Sales DESC;
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/58a64924-97a7-47b3-83ce-4c0f712ec50d" />
 
 #### 📦 Key Category Insights
-text
 - Top Sub-Category: Phones (Technology) is a major driver with $327,782.45 in sales.
 - Strong Performance: Chairs (Furniture) follows closely with $322,822.73 in revenue.
 - Bulk Sales: Binders and Storage are the top sub-categories in Office Supplies.
@@ -94,7 +92,6 @@ LIMIT 10;
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/2be83303-129e-4f74-a4a9-d47d70bbf845" />
 
 #### 👤 Key Customer Insights
-text
 - Top Spender: Sean Miller is the highest-value customer with $25,043.05 spent.
 - Elite Tier: The top 3 customers (Sean, Tamara, and Raymond) have each spent over $15,000.
 - Customer Base: The top 10 customers collectively contribute a significant portion of individual high-ticket sales.
@@ -113,7 +110,6 @@ ORDER BY Sales_Year;
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/7f8c9e3a-2bab-4ef7-9cae-21b126125f4f" />
 
 #### 📈 Yearly Performance Insights
-text
 - Peak Year: 2018 was the highest revenue year with $722,052.02.
 - Growth Trend: Sales jumped significantly from $459,436.01 in 2016 to $600,192.55 in 2017.
 - Initial Performance: The business started strong in 2015 with $479,856.21 in total revenue.
