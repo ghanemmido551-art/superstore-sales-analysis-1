@@ -18,10 +18,18 @@ The first step was to ensure data integrity by checking for nulls and verifying 
  Checking for null values in Sales and Order ID
 SELECT 
     COUNT(*) AS total_rows,
-    COUNT(Order_ID) AS non_null_orders,
+    COUNT(`Order ID`) AS non_null_orders,
     COUNT(Sales) AS non_null_sales
-FROM `my_project.train`;
+FROM hardy-messenger-472122-c1.my_project.superstore_sales`Order ID`
 ```
+
+### 🔎 Data Quality Check Results:
+After running the initial cleaning query, the results confirmed that the dataset is highly reliable:
+* Total Rows: 9,800
+* Non-Null Order IDs: 9,800
+* Non-Null Sales: 9,800
+
+Conclusion: There are no missing values in the critical columns, allowing for an accurate revenue analysis without the need to drop or impute data.
 
 ## 🔍 2. Business Insights (SQL Queries)
 
@@ -32,57 +40,94 @@ FROM `my_project.train`;
 SELECT 
     Region, 
     ROUND(SUM(Sales), 2) AS Total_Sales,
-    COUNT(DISTINCT Order_ID) AS Total_Orders,
-    ROUND(SUM(Sales) / COUNT(DISTINCT Order_ID), 2) AS Avg_Order_Value
-FROM my_project.train
+    COUNT(DISTINCT `Order ID`) AS Total_Orders,
+    ROUND(SUM(Sales) / COUNT(DISTINCT `Order ID`), 2) AS Avg_Order_Value
+FROM hardy-messenger-472122-c1.my_project.superstore_sales
 GROUP BY Region
 ORDER BY Total_Sales DESC;
 ```
+
+#### 📊 Key Findings & Insights
+`text
+- Top Region: West with $710,219.68 in total revenue.
+- Highest Efficiency: East Region leads with an Avg Order Value of $489.06.
+- Order Volume: West processed 1,587 orders, the highest across all regions.
+- Growth Area: South Region is the lowest performer ($389,151.46 revenue).
+
 Q2: Top Performing Categories & Sub-Categories
 ​Which products are the primary revenue drivers?
 
 ```sql
 SELECT 
     Category, 
-    Sub_Category, 
+    `Sub-Category`, 
     ROUND(SUM(Sales), 2) AS Total_Sales
-FROM my_project.train
-GROUP BY Category, Sub_Category
+FROM hardy-messenger-472122-c1.my_project.superstore_sales
+GROUP BY Category, `Sub-Category`
 ORDER BY Category, Total_Sales DESC;
 ```
+
+#### 📦 Key Category Insights
+text
+- Top Sub-Category: Phones (Technology) is a major driver with $327,782.45 in sales.
+- Strong Performance: Chairs (Furniture) follows closely with $322,822.73 in revenue.
+- Bulk Sales: Binders and Storage are the top sub-categories in Office Supplies.
+- Low-Value Items: Fasteners and Envelopes contribute the least to the overall revenue.
+
 Q3: Customer Segmentation Analysis
 ​Who are our top 10 customers by spending?
 
 ```sql
 SELECT 
-    Customer_Name, 
+   `Customer Name` 
     Segment, 
     ROUND(SUM(Sales), 2) AS Total_Spent
-FROM my_project.train
-GROUP BY Customer_Name, Segment
+FROM hardy-messenger-472122-c1.my_project.superstore_sales
+GROUP BY `Customer Name`, Segment
 ORDER BY Total_Spent DESC
 LIMIT 10;
 ```
+
+#### 👤 Key Customer Insights
+text
+- Top Spender: Sean Miller is the highest-value customer with $25,043.05 spent.
+- Elite Tier: The top 3 customers (Sean, Tamara, and Raymond) have each spent over $15,000.
+- Customer Base: The top 10 customers collectively contribute a significant portion of individual high-ticket sales.
+
 Q4: Yearly Sales Growth
 ​How is the business performing over time?
 
 ```sql
 SELECT 
-    EXTRACT(YEAR FROM Order_Date) AS Sales_Year,
+    EXTRACT(YEAR FROM `Order Date`) AS Sales_Year,
     ROUND(SUM(Sales), 2) AS Annual_Revenue
-FROM my_project.train
+FROM hardy-messenger-472122-c1.my_project.superstore_sales
 GROUP BY Sales_Year
 ORDER BY Sales_Year;
 ```
+
+#### 📈 Yearly Performance Insights
+text
+- Peak Year: 2018 was the highest revenue year with $722,052.02.
+- Growth Trend: Sales jumped significantly from $459,436.01 in 2016 to $600,192.55 in 2017.
+- Initial Performance: The business started strong in 2015 with $479,856.21 in total revenue.
+- Consistent Upward Momentum: The data shows a clear year-over-year increase starting from 2016.
 ---
 
 ## 💡 Strategic Recommendations
 
-- **Focus on the West:**  
-  The analysis shows high revenue density in the West region; expanding logistics there could further boost sales.
+Based on the final data analysis of 9,800 records, the following strategic actions are recommended:
 
-- **Category Growth:**  
-  Technology and Furniture are top sellers. Marketing campaigns should lead with these categories.
+* Regional Market Optimization:
+    * Maximize West Region Dominance: As the primary revenue driver with $710,219.68, we should expand logistics and warehouse capacity in the West to maintain this lead.
+    * Target High-Spenders in the East: Since the East region has the highest Average Order Value ($489.06), marketing should focus on "Premium Product" bundles for this segment.
 
-- **High-Value Customers:**  
-  A loyalty program targeting the **Corporate** segment could stabilize long-term revenue.
+* Product Strategy:
+    * Inventory Priority: Prioritize stock for Phones ($327,782.45) and Chairs ($322,822.73), as they are the top-performing sub-categories.
+    * Review Low-Contribution Items: Re-evaluate the viability of Fasteners ($3,001.96), as their revenue contribution is minimal.
+
+* Customer Retention:
+    * High-Value Loyalty Program: Launch a VIP program for elite customers like Sean Miller ($25,043.05) and Tamara Chand ($19,052.22) to ensure long-term retention.
+
+* Growth Momentum:
+    * Replicate 2018 Success: With revenue peaking at $722,052.02 in 2018, the business should analyze and replicate the promotional strategies used during that year for future planning.
