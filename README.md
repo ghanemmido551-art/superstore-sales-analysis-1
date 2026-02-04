@@ -1,59 +1,88 @@
-# 🛒 Superstore Sales Analysis (SQL Project)
+# 📊 Superstore Sales Revenue Analysis
 
 ## 📋 Project Overview
-This project involves a comprehensive analysis of the Superstore Sales Dataset. The primary goal is to identify sales trends, evaluate profitability across different regions and categories, and provide data-driven recommendations to improve business performance.
+This project performs a deep dive into the Superstore Sales Dataset using SQL. Since the dataset focuses on sales transactions without profit margins, the analysis is centered on identifying high-growth regions, top-performing product categories, and customer segmentation to drive revenue growth.
 
-## 🛠️ Tools Used
-* Data Source: Superstore Sales Dataset (~10k rows)
-* Environment: Google BigQuery (SQL)
-* Key Skills: Data Cleaning, Aggregations, Grouping, and Performance Insights.
+## 🛠️ Tech Stack
+* Language: SQL
+* Platform: Google BigQuery
+* Dataset: Superstore Sales (9,800+ rows)
 
 ---
 
-## 🧹 1. Data Cleaning
-Before analysis, I ensured the data quality by checking for null values in critical columns like Sales and Profit.
+## 🧹 1. Data Cleaning & Preparation
+The first step was to ensure data integrity by checking for nulls and verifying the structure.
 
-`sql
--- Checking for missing values in core metrics
+```sql
+
+ Checking for null values in Sales and Order ID
 SELECT 
-    COUNT(*) - COUNT(Order_ID) AS missing_order_id,
-    COUNT(*) - COUNT(Sales) AS missing_sales,
-    COUNT(*) - COUNT(Profit) AS missing_profit
+    COUNT(*) AS total_rows,
+    COUNT(Order_ID) AS non_null_orders,
+    COUNT(Sales) AS non_null_sales
 FROM `my_project.train`;
-Mohamed mostafa, [2/3/2026 8:59 PM]
+```
+
+## 🔍 2. Business Insights (SQL Queries)
+
+​Q1: Revenue Trends by Region
+​Which geographical areas are generating the most revenue?
+
+```sql
 SELECT 
     Region, 
-    ROUND(SUM(Sales), 2) AS Total_Sales, 
-    ROUND(SUM(Profit), 2) AS Total_Profit
+    ROUND(SUM(Sales), 2) AS Total_Sales,
+    COUNT(DISTINCT Order_ID) AS Total_Orders,
+    ROUND(SUM(Sales) / COUNT(DISTINCT Order_ID), 2) AS Avg_Order_Value
 FROM my_project.train
 GROUP BY Region
-ORDER BY Total_Profit DESC;
+ORDER BY Total_Sales DESC;
+```
+Q2: Top Performing Categories & Sub-Categories
+​Which products are the primary revenue drivers?
 
-Mohamed mostafa, [2/3/2026 8:59 PM]
+```sql
 SELECT 
     Category, 
-    ROUND(SUM(Sales), 2) AS Total_Sales, 
-    ROUND(SUM(Profit), 2) AS Total_Profit,
-    ROUND((SUM(Profit) / SUM(Sales)) * 100, 2) AS Profit_Margin_Percentage
+    Sub_Category, 
+    ROUND(SUM(Sales), 2) AS Total_Sales
 FROM my_project.train
-GROUP BY Category
-ORDER BY Total_Profit DESC;
+GROUP BY Category, Sub_Category
+ORDER BY Category, Total_Sales DESC;
+```
+Q3: Customer Segmentation Analysis
+​Who are our top 10 customers by spending?
 
-Mohamed mostafa, [2/3/2026 8:59 PM]
+```sql
 SELECT 
-    Discount, 
-    AVG(Profit) AS Avg_Profit, 
-    COUNT(*) AS Number_of_Orders
+    Customer_Name, 
+    Segment, 
+    ROUND(SUM(Sales), 2) AS Total_Spent
 FROM my_project.train
-GROUP BY Discount
-ORDER BY Discount ASC;
-
-Mohamed mostafa, [2/3/2026 8:59 PM]
-SELECT 
-    Product_Name, 
-    SUM(Sales) AS Total_Sales, 
-    SUM(Profit) AS Total_Profit
-FROM my_project.train
-GROUP BY Product_Name
-ORDER BY Total_Profit DESC
+GROUP BY Customer_Name, Segment
+ORDER BY Total_Spent DESC
 LIMIT 10;
+```
+Q4: Yearly Sales Growth
+​How is the business performing over time?
+
+```sql
+SELECT 
+    EXTRACT(YEAR FROM Order_Date) AS Sales_Year,
+    ROUND(SUM(Sales), 2) AS Annual_Revenue
+FROM my_project.train
+GROUP BY Sales_Year
+ORDER BY Sales_Year;
+```
+---
+
+## 💡 Strategic Recommendations
+
+- **Focus on the West:**  
+  The analysis shows high revenue density in the West region; expanding logistics there could further boost sales.
+
+- **Category Growth:**  
+  Technology and Furniture are top sellers. Marketing campaigns should lead with these categories.
+
+- **High-Value Customers:**  
+  A loyalty program targeting the **Corporate** segment could stabilize long-term revenue.
