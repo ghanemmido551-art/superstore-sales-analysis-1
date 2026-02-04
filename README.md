@@ -22,6 +22,7 @@ SELECT
     COUNT(Sales) AS non_null_sales
 FROM hardy-messenger-472122-c1.my_project.superstore_sales`Order ID`
 ```
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/fba7791f-cf12-4325-9c90-cd92e2be6994" />
 
 ### 🔎 Data Quality Check Results:
 After running the initial cleaning query, the results confirmed that the dataset is highly reliable:
@@ -46,6 +47,7 @@ FROM hardy-messenger-472122-c1.my_project.superstore_sales
 GROUP BY Region
 ORDER BY Total_Sales DESC;
 ```
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/34bad90b-aceb-4ccb-b20a-defb51ba901b" />
 
 #### 📊 Key Findings & Insights
 `text
@@ -66,6 +68,7 @@ FROM hardy-messenger-472122-c1.my_project.superstore_sales
 GROUP BY Category, `Sub-Category`
 ORDER BY Category, Total_Sales DESC;
 ```
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/58a64924-97a7-47b3-83ce-4c0f712ec50d" />
 
 #### 📦 Key Category Insights
 text
@@ -87,6 +90,8 @@ GROUP BY `Customer Name`, Segment
 ORDER BY Total_Spent DESC
 LIMIT 10;
 ```
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/ada8d843-9127-4beb-918e-eaace9913285" />
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/2be83303-129e-4f74-a4a9-d47d70bbf845" />
 
 #### 👤 Key Customer Insights
 text
@@ -105,6 +110,7 @@ FROM hardy-messenger-472122-c1.my_project.superstore_sales
 GROUP BY Sales_Year
 ORDER BY Sales_Year;
 ```
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/7f8c9e3a-2bab-4ef7-9cae-21b126125f4f" />
 
 #### 📈 Yearly Performance Insights
 text
