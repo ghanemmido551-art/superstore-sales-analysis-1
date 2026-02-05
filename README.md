@@ -9,8 +9,8 @@ This project performs a deep dive into the Superstore Sales Dataset using SQL. S
 * Dataset: Superstore Sales (9,800+ rows)
 
   ## 📓 Project Links
-* Interactive Notebook: [View on Kaggle](حط_لينك_كاجل_هنا)
-* Tableau Dashboard: [View Live Dashboard](حط_لينك_تابلو_هنا)
+* Interactive Notebook: [View on Kaggle](https://www.kaggle.com/code/mohamedmoustfaghanem/notebook72b6b38ac4)
+* Tableau Dashboard: [View Live Dashboard](https://public.tableau.com/views/USSuperstoreSalesAnalysis-PortfolioProject/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link)
 
 ---
 
