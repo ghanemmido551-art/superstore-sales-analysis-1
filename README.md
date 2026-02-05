@@ -133,3 +133,7 @@ Based on the final data analysis of 9,800 records, the following strategic actio
 
 * Growth Momentum:
     * Replicate 2018 Success: With revenue peaking at $722,052.02 in 2018, the business should analyze and replicate the promotional strategies used during that year for future planning.
+      
+      ---
+      
+      🔗 View the Interactive Dashboard on Tableau Public: [https://public.tableau.com/views/USSuperstoreSalesAnalysis-PortfolioProject/Dashboard1?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link].
