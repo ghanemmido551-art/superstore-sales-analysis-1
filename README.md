@@ -24,6 +24,27 @@ FROM hardy-messenger-472122-c1.my_project.superstore_sales`Order ID`
 ```
 <img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/fba7791f-cf12-4325-9c90-cd92e2be6994" />
 
+### SQL Implementation (BigQuery)
+To ensure data quality, I performed an audit for duplicates and verified the key metrics against the raw dataset:
+
+```sql
+-- Checking for duplicate orders
+SELECT `Order ID`, `Product ID`, COUNT(*)
+FROM `hardy-messenger-472122-c1.my_project.superstore_sales`
+GROUP BY `Order ID`, `Product ID`
+HAVING COUNT(*) > 1;
+```
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/b63b69b3-5d20-4906-81b7-b157c8efd9d9" />
+
+```sql
+-- Verifying annual sales performance
+SELECT EXTRACT(YEAR FROM Order_Date) AS Year, SUM(Sales) AS Annual_Sales
+FROM `hardy-messenger-472122-c1.my_project.superstore_sales`
+GROUP BY Year
+ORDER BY Year;
+```
+<img width="1280" height="960" alt="image" src="https://github.com/user-attachments/assets/4c7ec686-b42c-4795-8199-4f8188ac7dc9" />
+
 ### 🔎 Data Quality Check Results:
 After running the initial cleaning query, the results confirmed that the dataset is highly reliable:
 * Total Rows: 9,800
