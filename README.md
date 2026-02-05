@@ -8,6 +8,10 @@ This project performs a deep dive into the Superstore Sales Dataset using SQL. S
 * Platform: Google BigQuery
 * Dataset: Superstore Sales (9,800+ rows)
 
+  ## 📓 Project Links
+* Interactive Notebook: [View on Kaggle](حط_لينك_كاجل_هنا)
+* Tableau Dashboard: [View Live Dashboard](حط_لينك_تابلو_هنا)
+
 ---
 
 ## 🧹 1. Data Cleaning & Preparation
